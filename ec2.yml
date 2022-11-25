@@ -1,0 +1,35 @@
+# - name: launch new instance
+#   community.aws.ec2_instance:
+#     name: amazonlinux2
+#     region: ca-central-1
+#     key_name: ec2-user
+#     instance_type: t2.micro
+#     security_group: sg-09340af32a3e6801b
+#     vpc_subnet_id: subnet-d17d17b9
+#     network:
+#       assign_public_ip: true
+#       delete_on_termination: true
+#     image_id: ami-0ee679ef733e3b8e7 
+#     volumes: 
+#       - device_name: /dev/xvda
+#         ebs: 
+#           volume_size: 8
+#           volume_type: gp2
+#           delete_on_termination: true
+#   tags:
+#     - ec2_new
+- name: provision ec2 on aws
+  ec2:
+    key_name: CustomKPCanada
+    instance_type: t2.micro
+    image: ami-0ee679ef733e3b8e7 
+    wait: yes
+    vpc_subnet_id: subnet-d17d17b9
+    instance_tags:
+      Name: webserver
+    exact_count: 1
+    count_tag:
+      Name: 1
+    assign_public_ip: yes
+    region: ca-central-1
+    group_id: sg-09340af32a3e6801b

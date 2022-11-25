@@ -1,0 +1,7 @@
+---
+- name: Add Apache2 Webserver
+  hosts: webservers
+  become: true
+  gather_facts: no
+  roles:
+    - httpd

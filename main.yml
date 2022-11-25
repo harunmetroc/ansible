@@ -1,0 +1,25 @@
+---
+- name: Add Apache2 Webserver
+  hosts: webservers
+  become: true
+  gather_facts: no
+  tasks:
+    - name: update
+      yum:
+        name: "*"
+        state: latest
+    - name: install web server
+      yum:
+        name: httpd
+        state: latest
+
+    - name: install web server
+      service:
+        name: httpd
+        enabled: yes
+
+    - name: modify home page
+      shell: 'echo "Hello World!" >> /var/www/html/index.html'
+    
+    - name: Start the Webserver
+      shell: sudo service httpd start

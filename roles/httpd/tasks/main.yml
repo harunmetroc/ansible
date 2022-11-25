@@ -1,0 +1,12 @@
+---
+# tasks file for httpd
+- name: install web server
+  ansible.builtin.yum:
+    name: "httpd"
+    state: present
+
+- name: modify home page
+  shell: 'echo "Hello World!" >> /var/www/html/index.html'
+
+- name: Start the Webserver
+  shell: sudo service httpd start
